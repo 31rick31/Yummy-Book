@@ -13,6 +13,10 @@
 		DC7AA081286A6C6C00B5DF7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC7AA07F286A6C6C00B5DF7F /* Main.storyboard */; };
 		DC7AA083286A6C6E00B5DF7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC7AA082286A6C6E00B5DF7F /* Assets.xcassets */; };
 		DC7AA086286A6C6E00B5DF7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC7AA084286A6C6E00B5DF7F /* LaunchScreen.storyboard */; };
+		DC7AA08E286A71A800B5DF7F /* DessertListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AA08D286A71A800B5DF7F /* DessertListVC.swift */; };
+		DC7AA093286A93A700B5DF7F /* MealsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AA092286A93A700B5DF7F /* MealsModel.swift */; };
+		DC7AA095286B7B0300B5DF7F /* MealInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AA094286B7B0300B5DF7F /* MealInfoModel.swift */; };
+		DC7AA097286B7C4E00B5DF7F /* MealsManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AA096286B7C4E00B5DF7F /* MealsManger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		DC7AA082286A6C6E00B5DF7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC7AA085286A6C6E00B5DF7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC7AA087286A6C6E00B5DF7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC7AA08D286A71A800B5DF7F /* DessertListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertListVC.swift; sourceTree = "<group>"; };
+		DC7AA092286A93A700B5DF7F /* MealsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsModel.swift; sourceTree = "<group>"; };
+		DC7AA094286B7B0300B5DF7F /* MealInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInfoModel.swift; sourceTree = "<group>"; };
+		DC7AA096286B7C4E00B5DF7F /* MealsManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsManger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,43 @@
 		DC7AA078286A6C6C00B5DF7F /* Yummy Book */ = {
 			isa = PBXGroup;
 			children = (
+				DC7AA091286A934700B5DF7F /* Model */,
+				DC7AA090286A933700B5DF7F /* View */,
+				DC7AA08F286A930100B5DF7F /* Controller */,
 				DC7AA079286A6C6C00B5DF7F /* AppDelegate.swift */,
 				DC7AA07B286A6C6C00B5DF7F /* SceneDelegate.swift */,
-				DC7AA07D286A6C6C00B5DF7F /* ViewController.swift */,
 				DC7AA07F286A6C6C00B5DF7F /* Main.storyboard */,
 				DC7AA082286A6C6E00B5DF7F /* Assets.xcassets */,
 				DC7AA084286A6C6E00B5DF7F /* LaunchScreen.storyboard */,
 				DC7AA087286A6C6E00B5DF7F /* Info.plist */,
 			);
 			path = "Yummy Book";
+			sourceTree = "<group>";
+		};
+		DC7AA08F286A930100B5DF7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DC7AA07D286A6C6C00B5DF7F /* ViewController.swift */,
+				DC7AA08D286A71A800B5DF7F /* DessertListVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DC7AA090286A933700B5DF7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC7AA091286A934700B5DF7F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC7AA092286A93A700B5DF7F /* MealsModel.swift */,
+				DC7AA094286B7B0300B5DF7F /* MealInfoModel.swift */,
+				DC7AA096286B7C4E00B5DF7F /* MealsManger.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +175,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC7AA07E286A6C6C00B5DF7F /* ViewController.swift in Sources */,
+				DC7AA093286A93A700B5DF7F /* MealsModel.swift in Sources */,
+				DC7AA097286B7C4E00B5DF7F /* MealsManger.swift in Sources */,
+				DC7AA08E286A71A800B5DF7F /* DessertListVC.swift in Sources */,
 				DC7AA07A286A6C6C00B5DF7F /* AppDelegate.swift in Sources */,
+				DC7AA095286B7B0300B5DF7F /* MealInfoModel.swift in Sources */,
 				DC7AA07C286A6C6C00B5DF7F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +333,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -321,6 +362,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
