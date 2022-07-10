@@ -1,18 +1,21 @@
 //
-//  DessertListVC.swift
+//  DessertSearchVC.swift
 //  Yummy Book
 //
-//  Created by Ricky Memije on 6/25/22.
+//  Created by Ricky Memije on 7/9/22.
 //
 
 import UIKit
 
-class DessertListVC: UITableViewController, UISearchBarDelegate {
+class DessertSearchVC: UITableViewController, UISearchBarDelegate {
     
-    //MARK: - Identifiers
-    let mealCell = "MealCell"
+    //MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    let searchMealCell = "SearchMealCell"
     let mealsManager = MealsManger()
     
+    var filteredMealsArray: [Meals]!
     var mealArray: [Meals]? {
         didSet {
             DispatchQueue.main.async {
@@ -21,25 +24,24 @@ class DessertListVC: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    
-    //MARK: - viewDidLoad
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(itemFound), name: .itemLoaded, object: nil)
         
+        searchBar.delegate = self
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
-
+        
+        
         mealsManager.fetchMeals { (meals) in
             self.mealArray = meals.meals
         }
-        
     }
     
     @objc func itemFound(){
-        performSegue(withIdentifier: "showDessert", sender: self)
+        performSegue(withIdentifier: "showDessert2", sender: self)
     }
     
     func getMealItem(id: String){
@@ -48,23 +50,21 @@ class DessertListVC: UITableViewController, UISearchBarDelegate {
             
         }
     }
-    
 }
 
-//MARK: TableView Functions
-extension DessertListVC {
+extension DessertSearchVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return mealArray?.count ?? 0
+        return filteredMealsArray?.count ?? 0
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: mealCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: searchMealCell, for: indexPath)
         
-        guard let meal = mealArray?[indexPath.row] else { return UITableViewCell() }
+        guard let meal = filteredMealsArray?[indexPath.row] else { return UITableViewCell() }
         
         cell.textLabel?.text = "\(meal.strMeal ?? "no data")"
         return cell
@@ -73,9 +73,34 @@ extension DessertListVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let idToBeSent = mealArray?[indexPath.row].idMeal
+        let idToBeSent = filteredMealsArray?[indexPath.row].idMeal
         print(idToBeSent!)
         getMealItem(id: idToBeSent!)
         
     }
+    
+    // MARK: Searchbar Functions
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        
+        filteredMealsArray = []
+        
+         if searchText == "" {
+            filteredMealsArray = mealArray
+        }
+        else {
+            
+            for dessert in mealArray! {
+                if dessert.strMeal!.lowercased().contains(searchText.lowercased()) {
+                    
+                    filteredMealsArray.append(dessert)
+                }
+            }
+            
+        }
+        self.tableView.reloadData()
+
+    }
 }
+

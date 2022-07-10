@@ -25,6 +25,7 @@ class MealsManger {
                 print("Error fetching meals: \(error.localizedDescription)")
             }
             
+            // parsing JSON
             guard let jsonData = data else { return }
             
             let decoder = JSONDecoder()
@@ -47,13 +48,14 @@ class MealsManger {
         guard let url = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + "\(mealId)")
         else { return }
         print(url)
+        let semaphore = DispatchSemaphore (value: 0)
         
         
         let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
                 print("Error fetching meals info: \(error.localizedDescription)")
             }
-            
+            // parsing JSON
             guard let jsonData = data else { return }
             
             let decoder = JSONDecoder()
@@ -71,7 +73,7 @@ class MealsManger {
                     var ingredients: [String] = []
                     var measurements: [String] = []
                     
-                    // Filtering any empty Strings from ingredients Array
+                    // Filtering any empty Strings from ingredients Array and adding ingredients to Array
                     if infoForMeal.strIngredient1!.count >= 1 {
                         ingredients.append(infoForMeal.strIngredient1 ?? "")
                     }
@@ -118,7 +120,7 @@ class MealsManger {
                         ingredients.append(infoForMeal.strIngredient15 ?? "")
                     }
 
-                    // Filtering any empty Strings from measurements Array
+                    // Filtering any empty Strings from measurements Array and addin measurments to Array
                     if infoForMeal.strIngredient1!.count >= 1 {
                         measurements.append(infoForMeal.strMeasure1 ?? "")
                     }
@@ -167,17 +169,23 @@ class MealsManger {
 
                     
                     MealsManger.mealIdInfo = MealIdInfo(id: infoForMeal.idMeal, title: infoForMeal.strMeal, instructions: infoForMeal.strInstructions, thumb: infoForMeal.strMealThumb, ingredients: ingredients, measurements: measurements)
+                    semaphore.signal()
                     
                     print("Meal Info: \(MealsManger.mealInfo)")
                     print("Meal ID Info: \(MealsManger.mealIdInfo)")
+                    print("ing array: \(MealsManger.mealIdInfo.ingredients)")
+                    print("mea array: \(MealsManger.mealIdInfo.measurements)")
                 }
                 
                 completion(decodeData)
             } catch {
                 print("Error decoding data")
+                semaphore.signal()
             }
         }
         dataTask.resume()
+        semaphore.wait()
+        NotificationCenter.default.post(name: .itemLoaded, object: self)
     }
  
     
